@@ -48,7 +48,7 @@
 .dark-mode .news-updates,
 .dark-mode .map,
 .dark-mode .map-container {  
-  background-color: #1a1a1a; /* Slightly lighter dark color for sections */
+  background-image: url(Images/nightSKy.jpeg); /* Slightly lighter dark color for sections */
   color: #ddd; /* Even lighter text color for readability */
 }
 
@@ -194,8 +194,15 @@ section {
           width: 90%;
         }
       }
-
-    .icons a,
+    .icons{
+      display: flex;
+      
+    }
+    .icons > div:first-child {
+      /* first div of icons( login button) */
+       width: 6.2rem;
+     }
+    
     .icons div{
         height: 4.5rem;
         width: 4.5rem;
@@ -209,7 +216,7 @@ section {
         border-radius: .5rem;
 
         &:hover{
-        background: #777;
+        background-color: #777;
         color:#fff;
         }
     }
@@ -225,7 +232,7 @@ section {
     z-index: 1010;
     height: 100%;
     width: fit-content;
-    background-image: url(/Images/344403.jpg);
+    background-color:rgba(0, 0, 0, 0.5);
     background-position: center;
     background-size: cover;
     display: flex;
@@ -295,8 +302,8 @@ section {
   }
 
   .login-btn {
-      padding: 10px; /* Adjust padding as needed */
-      transition: background-color 0.3s ease;
+    width: 6.2rem;
+    transition: background-color 0.3s ease;
   }
 
   .login-btn:hover {
