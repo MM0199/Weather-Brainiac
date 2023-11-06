@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WEATHER BRAINIAC</title>
+
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="home.css">
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    </head>
+</html>
+
+<body>
+
+    <!-- Header Scetion Starts -->
+
+    <header class="header">
+
+        <a href="#home" class="logo"> <img src="Images/LOGO1.png" alt=""> </a>
+    
+        <form class="search-form" onsubmit="event.preventDefault(); fetchWeatherData(document.getElementById('search-box').value);">
+            <input class='input' type="search" name="" placeholder="Search location ..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    
+        <div class="icons">
+            <a href="login.html" class="login-btn">Login</a>
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="fav.html" class="fas fa-heart" id="save-favorite"></a>
+            <div id="dark-mode-toggle" class="fas fa-moon"></div>
+
+        </div>
+
+
+    
+    </header>
+
+    <!-- navbar section  -->
+
+    <nav class="navbar">
+        <div id="close-navbar" class="fas fa-times"></div>
+        <a href="#home" class="subheading-btn">home</a>
+        <a href="#weather" class="subheading-btn">weather</a>
+        <a href="maps.html" class="maps-btn">maps</a>
+        <a href="#hourly forecast" class="subheading-btn">hourly forecast</a>
+        <a href="monthly.html" class="monthlyForecast-btn">monthlyForecast</a>
+        <a href="feedback.html" class="feedback-btn">feedback</a>
+    </nav>
+
+    <style>
+        .navbar a {
+            font-size: 20px; /* Choose your desired size */
+            color: var(--black);
+        }
+    </style>
+
+    <!-- navbar section  -->
+
+    <!-- Header Scetion Ends -->
+
+    <!-- Current Weather Forecast Starts -->
+    <section class="weather-section">
+        <section class="current-weather">
+            <h2>Current Weather</h2>
+            <div class="weather-info">
+                <!-- Place all the relevant information about the current weather here. 
+                    For example, temperature, condition, humidity, etc. -->
+                <!-- <p><strong>Temperature:</strong> 25°C</p>
+                <p><strong>Condition:</strong> Sunny</p>
+                <p><strong>Humidity:</strong> 60%</p> -->
+                <p><strong>Location:</strong> <span id="weather-location">N/A</span></p>
+                <p><strong>Temperature:</strong> <span id="weather-temperature">N/A</span>°C</p>
+                <p><strong>Condition:</strong> <span id="weather-condition">N/A</span></p>
+                <p><strong>Humidity:</strong> <span id="weather-humidity">N/A</span></p>
+                <p><strong>Wind Speed:</strong> <span id="weather-wind">N/A</span></p>
+            </div>
+        </section>
+
+        <!-- Current Weather Forecast Ends -->
+
+        <!-- 10 day Forecast Starts-->
+
+        <div class = "forecast-contanier">
+            <section class="seven-day-forecast">
+                <h2>7-day Forecast</h2>
+                <div class="forecast-grid">
+                    <div class="swiper-wrapper">
+                    <!-- Each of these divs represents a day in the 10-day forecast. 
+                        You can add more information as needed. -->
+                    <div class="forecast-day">
+                        <h3>Monday</h3>
+                        <p>High: 27°C</p>
+                        <p>Low: 18°C</p>
+                        <p>Condition: Rainy</p>
+                    </div>
+                    <div class="forecast-day">
+                        <h3>Tuesday</h3>
+                        <p>High: 25°C</p>
+                        <p>Low: 17°C</p>
+                        <p>Condition: Sunny</p>
+                    </div>
+                    <div class="forecast-day">
+                        <h3>Wednesday</h3>
+                        <p>High: 25°C</p>
+                        <p>Low: 17°C</p>
+                        <p>Condition: Sunny</p>
+                    </div>
+                    <div class="forecast-day">
+                        <h3>Thursday</h3>
+                        <p>High: 25°C</p>
+                        <p>Low: 17°C</p>
+                        <p>Condition: Sunny</p>
+                    </div>
+                    <div class="forecast-day">
+                        <h3>Friday</h3>
+                        <p>High: 25°C</p>
+                        <p>Low: 17°C</p>
+                        <p>Condition: Sunny</p>
+                    </div>
+                    <div class="forecast-day">
+                        <h3>Saturday</h3>
+                        <p>High: 25°C</p>
+                        <p>Low: 17°C</p>
+                        <p>Condition: Sunny</p>
+                    </div>
+                    <div class="forecast-day">
+                        <h3>Sunday</h3>
+                        <p>High: 25°C</p>
+                        <p>Low: 17°C</p>
+                        <p>Condition: Sunny</p>
+                    </div>
+                    <!-- Repeat the above structure for the remaining 8 days -->
+                    </div>
+                </div>
+            </section> 
+        </div>  
+    </section> 
+
+    <!-- 10 day Forecast Ends-->
+
+    <!-- Hourly Forecast Starts-->
+
+    <section class = "hr">
+    <section class="hourly-forecast-section">
+        <h2>Hourly Forecast</h2>
+        <div class="chart-container">
+            <canvas id="hourlyForecastChart"></canvas>
+        </div>
+    </section>
+    </section>
+
+    <!-- Hourly Forecast Ends-->
+
+    <!-- Additional Weather Details Starts -->
+    <section class = "wd">
+    <section class="additional-weather-details">
+        <h2>Weather Details</h2>
+        <div class="details-grid">
+            <div class="detail-item">
+                <h3>Wind</h3>
+                <p id="detail-wind">Loading...</p>
+            </div>
+            <div class="detail-item">
+                <h3>Humidity</h3>
+                <p id="detail-humidity">--</p>
+            </div>
+            <div class="detail-item">
+                <h3>Sunrise & Sunset</h3>
+                <p>Sunrise: <span id="weather-sunrise">--:--</span></p>
+                <p>Sunset: <span id="weather-sunset">--:--</span></p>
+            </div>
+            <div class="detail-item">
+                <h3>Feels Like</h3>
+                <p id="detail-feelslike">--</p>
+            </div>
+            <div class="detail-item">
+                <h3>Precipitation</h3>
+                <p id="detail-precipitation">--</p>
+            </div>
+            <div class="detail-item">
+                <h3>Visibility</h3>
+                <p id="detail-visibility">--</p>
+            </div>
+        </div>
+    </section>
+    <!-- Additional Weather Details Ends -->
+</section>
+
+
+    <!-- News and Updates Section Starts -->
+    <section class = 'nu'>
+    <section class="news-updates">
+        <h2>News and Updates</h2>
+        <div class="news-container">
+            <!-- Each of these divs represents a news/update item. You can add as many as needed. -->
+            <div class="news-item">
+                <h3>Weather Alert</h3>
+                <p>There is a thunderstorm warning in the northeast region for the next 24 hours. Residents are advised to stay indoors and avoid travel.</p>
+                <span class="news-date">Nov 1, 2023</span>
+            </div>
+            <div class="news-item">
+                <h3>Weather Facts</h3>
+                <p>Did you know? Lightning can heat the air it passes through to 50,000 degrees Fahrenheit (5 times hotter than the surface of the sun).</p>
+                <span class="news-date">Nov 1, 2023</span>
+            </div>
+            <!-- Add more news items as needed -->
+        </div>
+    </section>
+    </section>
+
+
+    <!-- News and Updates Section Ends -->
+
+    <!-- Maps section Starts -->
+    <section class = "map">
+    <div class="map-container">
+        <h2>Maps</h2>
+        <div id="mapid" style="width: 950px; height: 300px;"></div>
+    </div>
+    </section>
+
+    <!-- Maps section Ends -->
+    
+    
+
+
+    <!-- Footer Section Starts -->
+    <!-- Footer Section Starts -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <a href="#home" class="logo">
+                <img src="Images/LOGO1.png" alt="Weather Brainiac Logo">
+            </a>
+            <p class="footer-text">Providing accurate weather forecasts for over a decade.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin-in"></a>
+            </div>
+            <div class="footer-section contact-form">
+                <h3>Contact us</h3>
+                <form action="#">
+                    <input type="email" name="email" placeholder="Your email address" required>
+                    <textarea rows="4" placeholder="Your message"></textarea>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2023 Weather Brainiac. All rights reserved.
+    </div>
+</footer>
+<!-- Footer Section Ends -->
+
+<!-- Footer Section Ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+          slidesPerView: 3,  // Adjust this based on how many slides you want to show at once
+          spaceBetween: 20,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      </script>
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link      -->
+<script src="script.js"></script>
+
+<script>
+    lightGallery(document.querySelector('.gallery .lightbox'));
+</script>
+</body>
